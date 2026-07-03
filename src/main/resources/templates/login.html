@@ -1,81 +1,265 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Login</title>
+    <meta charset="UTF-8">
+    <title>Habitaciones - Alu Booking</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/material_purple.css">
 
-<style>
-body {
-    margin: 0;
-    font-family: Arial;
-    background: linear-gradient(135deg, #f3e8ff, #e0e7ff);
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #f3e8ff, #e0e7ff);
+            min-height: 100vh;
+            color: #4a3b6a;
+        }
+        
+        /* NAVBAR */
+        nav {
+            background: #cdb4db;
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            box-shadow: 0 2px 10px rgba(74, 59, 106, 0.15);
+        }
+        nav a {
+            text-decoration: none;
+            color: #5c4d7d;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+        nav a:hover { 
+            color: #382c54; 
+            transform: scale(1.05); 
+        }
 
-.card {
-    background: rgba(255,255,255,0.92);
-    padding: 40px;
-    border-radius: 18px;
-    width: 360px;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-}
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        h2 { 
+            text-align: center; 
+            color: #4a3b6a;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        .subtitulo {
+            text-align: center;
+            color: #7a6a9f;
+            margin-top: 0;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
 
-h1 {
-    color: #4b3f72;
-    margin-bottom: 20px;
-}
+        /* GRID DE HABITACIONES */
+        .grid-habitaciones {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        .card-habitacion {
+            background: rgba(255, 255, 255, 0.94);
+            border-radius: 16px;
+            overflow: hidden; /* Para que la imagen respete las esquinas redondeadas */
+            display: flex;
+            gap: 20px;
+            box-shadow: 0 6px 20px rgba(74, 59, 106, 0.08);
+            border: 1px solid #e9dbf7;
+        }
 
-input {
-    width: 100%;
-    padding: 12px;
-    margin: 8px 0;
-    border-radius: 10px;
-    border: 1px solid #ddd;
-    outline: none;
-}
+        /* FOTOS REALES */
+        .contenedor-foto {
+            width: 300px;
+            min-width: 300px;
+            height: 220px;
+            position: relative;
+        }
+        .foto-hab {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* INFO CENTRAL */
+        .info-hab {
+            flex: 1;
+            padding: 20px 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .info-hab h3 { 
+            margin: 0 0 8px 0; 
+            color: #4a3b6a; 
+            font-size: 22px;
+        }
+        .info-hab p { 
+            margin: 0 0 12px 0; 
+            color: #7a6a9f; 
+            font-size: 14px; 
+            line-height: 1.4;
+        }
+        .tag-desayuno {
+            align-self: flex-start;
+            background: #fdfaff;
+            border: 1px solid #cdb4db;
+            color: #5c4d7d;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .precio-base { 
+            font-weight: bold; 
+            color: #4a3b6a; 
+            font-size: 18px;
+            margin-top: 12px; 
+        }
 
-button {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 10px;
-    background: #7c6bb1;
-    color: white;
-    cursor: pointer;
-    margin-top: 10px;
-}
-
-button:hover {
-    background: #5b4a8a;
-}
-
-a {
-    display: block;
-    margin-top: 12px;
-    color: #7c6bb1;
-    text-decoration: none;
-}
-</style>
+        /* FORMULARIO DE RESERVA (DERECHA) */
+        .form-reserva {
+            padding: 20px 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            justify-content: center;
+            align-items: flex-end;
+            background: rgba(243, 232, 255, 0.3);
+            border-left: 1px solid #f3e8ff;
+            min-width: 240px;
+        }
+        .input-calendario {
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #cdb4db;
+            text-align: center;
+            width: 220px;
+            outline: none;
+            background-color: #fdfaff;
+            color: #4a3b6a; 
+            font-weight: bold;
+        }
+        .input-calendario::placeholder {
+            color: #a89bbd; 
+        }
+        .contenedor-precio {
+            font-size: 15px;
+            color: #7a6a9f;
+            margin: 5px 0;
+        }
+        .contenedor-precio strong {
+            font-size: 20px;
+            color: #4a3b6a;
+        }
+        .btn-reservar {
+            background: #cdb4db; 
+            color: #4a3b6a;
+            border: none;
+            padding: 11px 24px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 3px 6px rgba(74, 59, 106, 0.1);
+            width: 220px;
+        }
+        .btn-reservar:hover { 
+            background: #e2cfea; 
+            color: #382c54;
+            transform: scale(1.02); 
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="card">
-    <h1>🔐 Login</h1>
+<nav>
+    <a href="/">Inicio</a>
+    <a href="/habitaciones">Habitaciones</a>
+    <a href="/reservar">Reservar</a>
+    <a href="/login">Login</a>
+    <a href="/registro">Registro</a>
+</nav>
 
-    <form action="/login" method="post">
-        <input name="user" placeholder="Usuario" required>
-        <input name="pass" type="password" placeholder="Contraseña" required>
+<div class="container">
+    <h2>Nuestras Habitaciones Disponibles</h2>
+    <p class="subtitulo">Elegí las fechas ideales para tu estadía. El desayuno buffet continental está incluido en todos los planes.</p>
 
-        <button type="submit">Entrar</button>
-    </form>
+    <div class="grid-habitaciones">
+        <div th:each="hab : ${habitaciones}" class="card-habitacion">
+            
+            <div class="contenedor-foto">
+                <img th:if="${hab.id == 1}" src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=400&auto=format&fit=cover&q=80" class="foto-hab" alt="Habitación Single">
+                <img th:if="${hab.id == 2}" src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=400&auto=format&fit=cover&q=80" class="foto-hab" alt="Habitación Doble">
+                <img th:if="${hab.id == 3}" src="https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=400&auto=format&fit=cover&q=80" class="foto-hab" alt="Habitación Triple">
+                <img th:if="${hab.id == 4}" src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=400&auto=format&fit=cover&q=80" class="foto-hab" alt="Habitación Suite">
+            </div>
+            
+            <div class="info-hab">
+                <h3 th:text="${hab.nombre}">Nombre Habitación</h3>
+                <p th:text="${hab.descripcion}">Descripción corta de la habitación.</p>
+                
+                <div class="tag-desayuno">☕ Desayuno Buffet Incluido</div>
+                
+                <div class="precio-base">Precio por noche: $<span th:text="${#numbers.formatInteger(hab.precio, 1, 'POINT')}" th:id="'precioBase-' + ${hab.id}">0</span></div>
+            </div>
 
-    <a href="/registro">Crear cuenta</a>
+            <form action="/reservar-habitacion" method="POST" class="form-reserva" th:id="'form-' + ${hab.id}">
+                <input type="hidden" name="habitacionId" th:value="${hab.id}">
+                
+                <input type="text" name="fechas" class="input-calendario" placeholder="Seleccionar fechas..." required 
+                       th:data-id="${hab.id}" th:data-precio="${hab.precio}">
+                
+                <input type="hidden" name="precioTotal" th:id="'inputTotal-' + ${hab.id}" value="0">
+                
+                <div class="contenedor-precio">Total: <br><strong>$<span th:id="'txtTotal-' + ${hab.id}">0</span></strong></div>
+                
+                <button type="submit" class="btn-reservar">Reservar ya</button>
+            </form>
+
+        </div>
+    </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
+
+<script>
+    document.querySelectorAll('.input-calendario').forEach(input => {
+        const habId = input.getAttribute('data-id');
+        const precioPorNoche = parseFloat(input.getAttribute('data-precio'));
+
+        flatpickr(input, {
+            mode: "range",
+            minDate: "today",
+            locale: "es",
+            dateFormat: "Y-m-d",
+            onClose: function(selectedDates) {
+                if (selectedDates.length === 2) {
+                    const checkIn = selectedDates[0];
+                    const checkOut = selectedDates[1];
+                    
+                    const diffTime = Math.abs(checkOut - checkIn);
+                    const totalDias = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                    
+                    const precioTotal = totalDias * precioPorNoche;
+                    
+                    document.getElementById(`txtTotal-${habId}`).innerText = precioTotal.toLocaleString('es-AR');
+                    document.getElementById(`inputTotal-${habId}`).value = precioTotal;
+                } else {
+                    document.getElementById(`txtTotal-${habId}`).innerText = "0";
+                    document.getElementById(`inputTotal-${habId}`).value = 0;
+                }
+            }
+        });
+    });
+</script>
 </body>
 </html>

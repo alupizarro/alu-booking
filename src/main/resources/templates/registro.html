@@ -1,63 +1,92 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Registro</title>
+    <meta charset="UTF-8">
+    <title>Registro - Alu Booking</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #f3e8ff, #e0e7ff);
+            min-height: 100vh;
+            color: #4a3b6a;
+        }
+        nav {
+            background: #cdb4db;
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            box-shadow: 0 2px 10px rgba(74, 59, 106, 0.15);
+        }
+        nav a {
+            text-decoration: none;
+            color: #5c4d7d;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+        nav a:hover { color: #382c54; transform: scale(1.05); }
 
-<style>
-body {
-    margin: 0;
-    font-family: Arial;
-    background: linear-gradient(135deg, #f3e8ff, #e0e7ff);
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.card {
-    background: rgba(255,255,255,0.92);
-    padding: 40px;
-    border-radius: 18px;
-    width: 360px;
-    text-align: center;
-}
-
-h1 { color:#4b3f72; }
-
-input {
-    width: 100%;
-    padding: 12px;
-    margin: 8px 0;
-    border-radius: 10px;
-    border: 1px solid #ddd;
-}
-
-button {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 10px;
-    background: #7c6bb1;
-    color: white;
-}
-
-button:hover { background:#5b4a8a; }
-</style>
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.94);
+            padding: 40px;
+            border-radius: 18px;
+            width: 100%;
+            max-width: 380px;
+            box-shadow: 0 10px 30px rgba(74, 59, 106, 0.12);
+            border: 1px solid #e9dbf7;
+            text-align: center;
+        }
+        h2 { color: #4a3b6a; margin-bottom: 25px; }
+        .form-grupo { margin-bottom: 20px; text-align: left; }
+        label { display: block; margin-bottom: 6px; color: #5c4d7d; font-weight: bold; font-size: 14px; }
+        input {
+            width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #cdb4db;
+            outline: none; background-color: #fdfaff; color: #4a3b6a; font-size: 15px; box-sizing: border-box;
+        }
+        input::placeholder { color: #a89bbd; }
+        .btn-registro {
+            background: #cdb4db; color: #4a3b6a; border: none; padding: 14px; width: 100%;
+            border-radius: 8px; font-weight: bold; font-size: 16px; cursor: pointer; transition: 0.2s;
+        }
+        .btn-registro:hover { background: #e2cfea; color: #382c54; transform: scale(1.02); }
+    </style>
 </head>
-
 <body>
 
-<div class="card">
-    <h1>📝 Registro</h1>
+<nav>
+    <a href="/">Inicio</a>
+    <a href="/habitaciones">Habitaciones</a>
+    <a href="/reservar">Reservar</a>
+    <a href="/login">Login</a>
+    <a href="/registro">Registro</a>
+</nav>
 
-    <input placeholder="Usuario">
-    <input placeholder="Email">
-    <input type="password" placeholder="Contraseña">
-
-    <button>Crear cuenta</button>
-
-    <a href="/login">Ya tengo cuenta</a>
+<div class="container">
+    <div class="card">
+        <h2>Crear Cuenta 📝</h2>
+        <form action="/registro" method="POST">
+            <div class="form-grupo">
+                <label th:text="Nombre">Nombre completo</label>
+                <input type="text" name="nombreCompleto" placeholder="Tu nombre..." required>
+            </div>
+            <div class="form-grupo">
+                <label th:text="Email">Correo Electrónico</label>
+                <input type="email" name="email" placeholder="tu@email.com" required>
+            </div>
+            <div class="form-grupo">
+                <label th:text="Contraseña">Contraseña</label>
+                <input type="password" name="password" placeholder="Creá una contraseña..." required>
+            </div>
+            <button type="submit" class="btn-registro">Registrarse</button>
+        </form>
+    </div>
 </div>
 
 </body>

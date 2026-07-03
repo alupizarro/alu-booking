@@ -1,27 +1,80 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<title>Habitaciones</title>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 
-<link rel="stylesheet" href="/css/style.css">
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Habitaciones | Alu Booking Hotel</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+
 </head>
 
 <body>
 
-<div class="card">
-    <h1>🏨 Habitaciones disponibles</h1>
+<header>
 
-    <ul>
-        <th:block th:each="h : ${habitaciones}">
-            <li th:text="${h}"></li>
-        </th:block>
-    </ul>
+    <div class="logo">
+        ALU HOTEL
+    </div>
 
-    <a href="/reservar">
-        <button>Ir a reservar</button>
-    </a>
-</div>
+    <nav>
+
+        <a href="/">Inicio</a>
+
+        <a href="/habitaciones">Habitaciones</a>
+
+        <a href="/reservar">Reservar</a>
+
+        <a href="/contacto">Contacto</a>
+
+    </nav>
+
+</header>
+
+
+<section>
+
+    <h2>Nuestras Habitaciones</h2>
+
+    <div class="grid">
+
+        <div class="room" th:each="hab : ${habitaciones}">
+
+            <img src="/img/habitaciones/suite.jpg" alt="Habitación">
+
+            <h3 th:text="${hab.nombre}">Suite</h3>
+
+            <p th:text="${hab.descripcion}">
+                Descripción
+            </p>
+
+            <div class="price">
+
+                $ <span th:text="${#numbers.formatInteger(hab.precio,1,'POINT')}"></span>
+
+                / noche
+
+            </div>
+
+            <a class="btn"
+               th:href="@{/reservar(id=${hab.id})}">
+                Reservar
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<footer>
+
+    © 2026 ALU BOOKING HOTEL
+
+</footer>
 
 </body>
+
 </html>

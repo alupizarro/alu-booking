@@ -1,98 +1,104 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<title>Reservar - Alu Booking</title>
+    <meta charset="UTF-8">
+    <title>Reservar | Alu Booking</title>
 
-<link rel="stylesheet" href="/css/style.css">
-
-<!-- CALENDARIO FLATPICKR -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
 
-<div class="card">
-    <h1>Reservar habitación 🏨</h1>
+<header>
 
-    <input id="nombre" type="text" placeholder="Nombre">
+    <div class="logo">ALU HOTEL</div>
 
-    <label>Check-in</label>
-    <input id="checkin" placeholder="Check-in">
+    <nav>
+        <a href="/">Inicio</a>
+        <a href="/habitaciones">Habitaciones</a>
+        <a href="/reservar">Reservar</a>
+        <a href="/contacto">Contacto</a>
+    </nav>
 
-    <label>Check-out</label>
-    <input id="checkout" placeholder="Check-out">
+</header>
 
-    <label>Habitación</label>
-    <select id="habitacion" onchange="calcular()">
-        <option value="50">Simple - $50</option>
-        <option value="80">Doble - $80</option>
-        <option value="120">Suite - $120</option>
-    </select>
 
-    <h3 id="info">Total: $0</h3>
+<section class="hero">
 
-    <button onclick="reservar()">Confirmar reserva</button>
-</div>
+    <h1>Reservá tu estadía</h1>
 
-<!-- SCRIPTS -->
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <p>Elegí fechas, habitación y mirá el precio en tiempo real</p>
+
+</section>
+
+
+<section>
+
+    <h2>Simulador de reserva</h2>
+
+    <div class="grid" style="max-width:700px;margin:0 auto;display:block;">
+
+        <div class="room" style="padding:30px;">
+
+            <label>Check-in</label>
+            <input type="date" id="checkin">
+
+            <label>Check-out</label>
+            <input type="date" id="checkout">
+
+            <label>Habitación</label>
+            <select id="habitacion">
+                <option value="single" data-price="39000">Single - $39.000</option>
+                <option value="doble" data-price="59000">Doble - $59.000</option>
+                <option value="triple" data-price="79000">Triple - $79.000</option>
+                <option value="suite" data-price="99000">Suite - $99.000</option>
+            </select>
+
+            <div class="price" style="margin-top:20px;">
+                Total: $<span id="total">0</span>
+            </div>
+
+            <a class="btn" href="#" onclick="confirmar()">Confirmar reserva</a>
+
+        </div>
+
+    </div>
+
+</section>
+
 
 <script>
-flatpickr("#checkin", {
-    dateFormat: "Y-m-d",
-    onChange: function() {
-        calcular();
-    }
-});
-
-flatpickr("#checkout", {
-    dateFormat: "Y-m-d",
-    onChange: function() {
-        calcular();
-    }
-});
-
-function diasEntre(a, b) {
-    let d1 = new Date(a);
-    let d2 = new Date(b);
-    let diff = (d2 - d1) / (1000 * 60 * 60 * 24);
-    return diff;
-}
 
 function calcular() {
-    let checkin = document.getElementById("checkin").value;
-    let checkout = document.getElementById("checkout").value;
-    let precio = document.getElementById("habitacion").value;
 
-    if (!checkin || !checkout) {
-        document.getElementById("info").innerText = "Total: $0";
-        return;
+    let inDate = document.getElementById("checkin").value;
+    let outDate = document.getElementById("checkout").value;
+
+    let select = document.getElementById("habitacion");
+    let price = select.options[select.selectedIndex].dataset.price;
+
+    if (!inDate || !outDate) return;
+
+    let d1 = new Date(inDate);
+    let d2 = new Date(outDate);
+
+    let diff = (d2 - d1) / (1000 * 60 * 60 * 24);
+
+    if (diff > 0) {
+        let total = diff * price;
+        document.getElementById("total").innerText = total.toLocaleString("es-AR");
     }
-
-    let dias = diasEntre(checkin, checkout);
-
-    if (dias <= 0) {
-        document.getElementById("info").innerText = "Fechas inválidas";
-        return;
-    }
-
-    let total = dias * precio;
-
-    document.getElementById("info").innerText =
-        "Noches: " + dias + " | Total: $" + total;
 }
 
-function reservar() {
-    let nombre = document.getElementById("nombre").value;
+document.getElementById("checkin").addEventListener("change", calcular);
+document.getElementById("checkout").addEventListener("change", calcular);
+document.getElementById("habitacion").addEventListener("change", calcular);
 
-    if (!nombre) {
-        alert("Ingresá tu nombre");
-        return;
-    }
-
-    alert("Reserva confirmada 💜");
+function confirmar() {
+    alert("Reserva simulada creada ✔ (sin base de datos)");
 }
+
 </script>
 
 </body>

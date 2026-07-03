@@ -1,84 +1,147 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<title>Alu Booking</title>
-
-<style>
-body {
-    margin: 0;
-    font-family: Arial;
-    background: linear-gradient(135deg, #f3e8ff, #e0e7ff);
-    min-height: 100vh;
-}
-
-/* NAVBAR */
-nav {
-    background: #cdb4db;
-    padding: 15px;
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-nav a {
-    text-decoration: none;
-    color: #4b3f72;
-    font-weight: bold;
-    transition: 0.2s;
-}
-
-nav a:hover {
-    color: #2f2550;
-    transform: scale(1.05);
-}
-
-/* CENTRO */
-.container {
-    height: calc(100vh - 60px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.card {
-    background: rgba(255,255,255,0.92);
-    padding: 40px;
-    border-radius: 18px;
-    width: 360px;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-}
-
-h1 {
-    color: #4b3f72;
-}
-
-p {
-    color: #6b5a9a;
-}
-</style>
+    <meta charset="UTF-8">
+    <title>Alu Booking Hotel</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
 
-<!-- 🔥 NAVBAR -->
-<nav>
-    <a href="/">Inicio</a>
-    <a href="/habitaciones">Habitaciones</a>
-    <a href="/reservar">Reservar</a>
-    <a href="/login">Login</a>
-    <a href="/registro">Registro</a>
-</nav>
+<header>
 
-<!-- 💜 CONTENIDO -->
-<div class="container">
-    <div class="card">
-        <h1>🏨 Alu Booking</h1>
-        <p>Tu hotel, simple y moderno 💜</p>
+    <div class="logo">ALU HOTEL</div>
+
+    <nav>
+        <a href="/">Inicio</a>
+        <a href="/habitaciones">Habitaciones</a>
+        <a href="/reservar">Reservar</a>
+        <a href="/contacto">Contacto</a>
+    </nav>
+
+</header>
+
+
+<!-- HERO -->
+<section class="hero">
+
+    <h1>Descansá. Disfrutá. Viví ALU.</h1>
+
+    <p>
+        Un hotel boutique pensado para el descanso,
+        la comodidad y la experiencia premium.
+    </p>
+
+    <a href="/habitaciones" class="btn">Ver habitaciones</a>
+
+</section>
+
+
+<!-- INSTALACIONES -->
+<section>
+
+    <h2>Instalaciones</h2>
+
+    <div class="grid">
+
+        <div class="room">
+            <img src="/img/instalaciones/recepcion.jpg">
+            <h3>Recepción</h3>
+            <p>Atención 24hs personalizada.</p>
+        </div>
+
+        <div class="room">
+            <img src="/img/instalaciones/piscina.jpg">
+            <h3>Piscina climatizada</h3>
+            <p>Relajación todo el año.</p>
+        </div>
+
+        <div class="room">
+            <img src="/img/instalaciones/desayuno.jpg">
+            <h3>Desayuno</h3>
+            <p>Desayuno continental premium.</p>
+        </div>
+
+        <div class="room">
+            <img src="/img/instalaciones/salon.jpg">
+            <h3>Salón</h3>
+            <p>Eventos y reuniones.</p>
+        </div>
+
+        <div class="room">
+            <img src="/img/instalaciones/gimnasio.jpg">
+            <h3>Gimnasio</h3>
+            <p>Equipamiento moderno.</p>
+        </div>
+
     </div>
-</div>
+
+</section>
+
+
+<!-- HABITACIONES -->
+<section>
+
+    <h2>Habitaciones</h2>
+
+    <div class="grid">
+
+        <div class="room">
+            <img src="/img/habitaciones/single.jpg">
+            <h3>Single</h3>
+            <p>Ideal para 1 huésped</p>
+        </div>
+
+        <div class="room">
+            <img src="/img/habitaciones/doble.jpg">
+            <h3>Doble</h3>
+            <p>Perfecta para parejas</p>
+        </div>
+
+        <div class="room">
+            <img src="/img/habitaciones/triple.jpg">
+            <h3>Triple</h3>
+            <p>Hasta 3 personas</p>
+        </div>
+
+        <div class="room">
+            <img src="/img/habitaciones/suite.jpg">
+            <h3>Suite</h3>
+            <p>Premium con jacuzzi</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- EXPERIENCIA -->
+<section>
+
+    <h2>Experiencia ALU</h2>
+
+    <div class="room">
+
+        <img src="/img/general/hotel.jpg">
+
+        <h3>Viví una estadía única</h3>
+
+        <p>
+            Diseño moderno, tonos lavanda, confort absoluto
+            y atención personalizada en cada detalle.
+        </p>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    © 2026 Alu Booking Hotel
+</footer>
 
 </body>
+
 </html>

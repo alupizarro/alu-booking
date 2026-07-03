@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class WebController {
 
     @GetMapping("/")
-    public String index() {
+    public String inicio() {
         return "index";
     }
 
@@ -20,4 +20,10 @@ public class WebController {
     public String reservar() {
         return "reservar";
     }
+
+    @GetMapping("/contacto")
+    public String contacto() {
+        return "index";
+    }
+
 }
