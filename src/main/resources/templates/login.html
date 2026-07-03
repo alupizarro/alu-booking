@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Login</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    background: linear-gradient(135deg, #f3e8ff, #e0e7ff);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    background: rgba(255,255,255,0.92);
+    padding: 40px;
+    border-radius: 18px;
+    width: 360px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+h1 {
+    color: #4b3f72;
+    margin-bottom: 20px;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    outline: none;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background: #7c6bb1;
+    color: white;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background: #5b4a8a;
+}
+
+a {
+    display: block;
+    margin-top: 12px;
+    color: #7c6bb1;
+    text-decoration: none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h1>🔐 Login</h1>
+
+    <form action="/login" method="post">
+        <input name="user" placeholder="Usuario" required>
+        <input name="pass" type="password" placeholder="Contraseña" required>
+
+        <button type="submit">Entrar</button>
+    </form>
+
+    <a href="/registro">Crear cuenta</a>
+</div>
+
+</body>
+</html>

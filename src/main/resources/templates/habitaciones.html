@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Habitaciones</title>
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+<div class="card">
+    <h1>🏨 Habitaciones disponibles</h1>
+
+    <ul>
+        <th:block th:each="h : ${habitaciones}">
+            <li th:text="${h}"></li>
+        </th:block>
+    </ul>
+
+    <a href="/reservar">
+        <button>Ir a reservar</button>
+    </a>
+</div>
+
+</body>
+</html>

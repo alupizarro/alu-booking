@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Reservar - Alu Booking</title>
+
+<link rel="stylesheet" href="/css/style.css">
+
+<!-- CALENDARIO FLATPICKR -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+
+<body>
+
+<div class="card">
+    <h1>Reservar habitación 🏨</h1>
+
+    <input id="nombre" type="text" placeholder="Nombre">
+
+    <label>Check-in</label>
+    <input id="checkin" placeholder="Check-in">
+
+    <label>Check-out</label>
+    <input id="checkout" placeholder="Check-out">
+
+    <label>Habitación</label>
+    <select id="habitacion" onchange="calcular()">
+        <option value="50">Simple - $50</option>
+        <option value="80">Doble - $80</option>
+        <option value="120">Suite - $120</option>
+    </select>
+
+    <h3 id="info">Total: $0</h3>
+
+    <button onclick="reservar()">Confirmar reserva</button>
+</div>
+
+<!-- SCRIPTS -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<script>
+flatpickr("#checkin", {
+    dateFormat: "Y-m-d",
+    onChange: function() {
+        calcular();
+    }
+});
+
+flatpickr("#checkout", {
+    dateFormat: "Y-m-d",
+    onChange: function() {
+        calcular();
+    }
+});
+
+function diasEntre(a, b) {
+    let d1 = new Date(a);
+    let d2 = new Date(b);
+    let diff = (d2 - d1) / (1000 * 60 * 60 * 24);
+    return diff;
+}
+
+function calcular() {
+    let checkin = document.getElementById("checkin").value;
+    let checkout = document.getElementById("checkout").value;
+    let precio = document.getElementById("habitacion").value;
+
+    if (!checkin || !checkout) {
+        document.getElementById("info").innerText = "Total: $0";
+        return;
+    }
+
+    let dias = diasEntre(checkin, checkout);
+
+    if (dias <= 0) {
+        document.getElementById("info").innerText = "Fechas inválidas";
+        return;
+    }
+
+    let total = dias * precio;
+
+    document.getElementById("info").innerText =
+        "Noches: " + dias + " | Total: $" + total;
+}
+
+function reservar() {
+    let nombre = document.getElementById("nombre").value;
+
+    if (!nombre) {
+        alert("Ingresá tu nombre");
+        return;
+    }
+
+    alert("Reserva confirmada 💜");
+}
+</script>
+
+</body>
+</html>

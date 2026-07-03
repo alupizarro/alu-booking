@@ -1,0 +1,60 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #f3e8ff, #e0e7ff);
+    min-height: 100vh;
+}
+
+/* tarjeta general */
+.card {
+    background: rgba(255,255,255,0.92);
+    padding: 40px;
+    border-radius: 18px;
+    width: 380px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    margin: auto;
+    margin-top: 10vh;
+}
+
+/* títulos */
+h1 {
+    color: #4b3f72;
+}
+
+/* inputs */
+input, select {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    outline: none;
+}
+
+/* botones */
+button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background: #7c6bb1;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+button:hover {
+    background: #5b4a8a;
+}
+
+/* links */
+a {
+    color: #7c6bb1;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+    opacity: 0.8;
+}
