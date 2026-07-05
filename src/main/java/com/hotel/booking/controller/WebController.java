@@ -11,7 +11,8 @@ public class WebController {
         return "index";
     }
 
-    @GetMapping("/habitaciones")
+    // <-- Cambiamos esta ruta para que no choque con HabitacionController
+    @GetMapping("/nuestras-habitaciones") 
     public String habitaciones() {
         return "habitaciones";
     }
@@ -22,8 +23,7 @@ public class WebController {
     }
 
     @GetMapping("/contacto")
-    public String contacto() {
-        return "index";
-    }
-
+public String contacto() {
+    return "contacto"; // Cambiado de "index" a "contacto"
+}
 }
